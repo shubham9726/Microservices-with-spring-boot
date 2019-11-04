@@ -1,13 +1,34 @@
 package com.example.documentdata.model;
 
+import org.springframework.data.annotation.Id;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@org.springframework.data.mongodb.core.mapping.Document(collection = "student")
+@org.springframework.data.mongodb.core.mapping.Document(collection = "document")
 public class Document {
 
+    @Id
+    private String id;
+    @NotNull
     private List<Object> document;
+    @NotNull
     private String name;
-    private String address;
+
+    public Document(String documentname) {
+        this.name = documentname;
+    }
+
+    public Document() {
+
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -15,14 +36,6 @@ public class Document {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public List<Object> getDocument() {

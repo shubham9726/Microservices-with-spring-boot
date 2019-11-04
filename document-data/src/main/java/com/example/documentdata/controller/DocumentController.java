@@ -22,32 +22,45 @@ public class DocumentController {
     private Environment environment;
     private static final String NAME = "hello world..!";
 
+    /**
+     *
+     * @return : local server port
+     */
     @RequestMapping("/getProperty")
     public String home() {
         return "Hello from Item Service running at port: " + environment.getProperty("local.server.port");
     }
 
+    /**
+     *
+     * @param name : name
+     * @return : document
+     */
     @HystrixCommand(fallbackMethod = "fallback")
     @RequestMapping("/{name}")
     public Document getGallery(@PathVariable final String name) {
-        /*LOGGER.info("Creating Item object ... ");*/
 
-        // create Document object
         Document document = new Document();
         document.setName(name);
 
-        // get list of available data
         List<Object> data = restTemplate.getForObject("http://studentdata-service/getAllData/", List.class);
         document.setDocument(data);
-
         return document;
     }
 
-    /*@RequestMapping("getAllData")
-    public Collection<item> getAll() {
-        return itemService.getAll();
-    }*/
+    /**
+     *
+     * @return : local server port
+     */
+    @RequestMapping("/admin")
+    public String homeAdmin() {
+        return "This is the admin area of Document service running at port: " + environment.getProperty("local.server.port");
+    }
 
+    /**
+     *
+     * @return : name
+     */
     @RequestMapping("name")
     public String getName(){
         return NAME;

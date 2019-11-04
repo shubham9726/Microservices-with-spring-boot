@@ -22,16 +22,29 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    /**
+     *
+     * @return : List of Student
+     */
     @RequestMapping("getAllData")
     public Collection<Student> getAll() {
         return studentService.getAll();
     }
 
+    /**
+     *
+     * @param student : student
+     * @return : Save and return student
+     */
     @PostMapping("save")
     public Student save(@RequestBody Student student) {
         return studentService.save(student);
     }
 
+    /**
+     *
+     * @return : Name
+     */
     @RequestMapping("name")
     public String getName(){
         return NAME;

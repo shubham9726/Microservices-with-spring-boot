@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
- * Mongo Config
+ * Mongo Configuration
  */
 class MongoConfiguration extends AbstractMongoConfiguration {
 
@@ -25,19 +25,16 @@ class MongoConfiguration extends AbstractMongoConfiguration {
     @Bean
     @Override
     public MongoClient mongoClient() {
-        System.out.println("qweweqwqweqw");
         return new MongoClient(new MongoClientURI(mongoProperties.getMongoUri()));
     }
 
     @Override
     protected String getDatabaseName() {
-        System.out.println("fxcgbhgjfghg");
         return mongoProperties.getMongoDatabase();
     }
 
     @Bean
     public MongoTemplate mongoTemplate() {
-        System.out.println("shuhbhamm");
         return new MongoTemplate(mongoClient(), getDatabaseName());
     }
 }
