@@ -2,6 +2,7 @@ package com.example.documentdata.model;
 
 import org.springframework.data.annotation.Id;
 import javax.validation.constraints.NotNull;
+import java.io.File;
 import java.util.List;
 
 @org.springframework.data.mongodb.core.mapping.Document(collection = "document")
@@ -14,13 +15,7 @@ public class Document {
     @NotNull
     private String name;
 
-    public Document(String documentname) {
-        this.name = documentname;
-    }
 
-    public Document() {
-
-    }
 
     public String getId() {
         return id;
