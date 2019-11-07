@@ -1,10 +1,9 @@
 package com.example.studentdata.repository;
 
 import com.example.studentdata.model.Student;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * Mongo Repository
+ * Student Repository
  */
-public interface StudentRepositry extends MongoRepository<Student, Integer> {
- }
+public interface StudentRepositry extends BaseRepository<Student>{
+}

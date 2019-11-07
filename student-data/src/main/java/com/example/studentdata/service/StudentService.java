@@ -1,11 +1,14 @@
 package com.example.studentdata.service;
 
 import com.example.studentdata.model.Student;
-import java.util.Collection;
+
+import java.util.List;
 
 public interface StudentService {
 
-    Collection<Student> getAll();
+    List getAll();
 
     Student save(Student student);
+
+    Student getStudentById(String id) throws Exception;
 }

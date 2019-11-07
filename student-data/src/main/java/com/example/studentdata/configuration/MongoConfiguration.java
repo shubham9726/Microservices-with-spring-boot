@@ -1,40 +1,46 @@
 package com.example.studentdata.configuration;
 
-
-import com.example.studentdata.properties.MongoProperties;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
  * Mongo Configuration
  */
+@Configuration
 class MongoConfiguration extends AbstractMongoConfiguration {
 
+    @Value("${mongodb.uri}")
+    private String mongodbUri;
 
-    private MongoProperties mongoProperties;
+    @Value("${mongodb.database}")
+    private String databaseName;
 
-    @Autowired
-    public MongoConfiguration(MongoProperties mongoProperties) {
-        this.mongoProperties = mongoProperties;
-    }
+    @Value("${mongodb.port}")
+    private int dbPort;
 
-    @Bean
     @Override
+    @Bean
     public MongoClient mongoClient() {
-        return new MongoClient(new MongoClientURI(mongoProperties.getMongoUri()));
+        return new MongoClient(new MongoClientURI(mongodbUri));
     }
 
     @Override
     protected String getDatabaseName() {
-        return mongoProperties.getMongoDatabase();
+        return databaseName;
     }
 
     @Bean
-    public MongoTemplate mongoTemplate() {
+    public MongoTemplate mongoTemplate() throws Exception {
         return new MongoTemplate(mongoClient(), getDatabaseName());
+    }
+
+    @Bean
+    public int getDbPort() {
+        return dbPort;
     }
 }
